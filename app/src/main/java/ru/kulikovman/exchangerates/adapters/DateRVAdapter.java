@@ -59,7 +59,8 @@ public class DateRVAdapter extends RecyclerView.Adapter<DateRVAdapter.ViewHolder
         @Override
         public void onClick(View v) {
             if (mClickListener != null) {
-                mClickListener.onItemClick(v, getAdapterPosition());
+                int position = getAdapterPosition();
+                mClickListener.onItemClick(v, position, mDateList.get(position));
             }
         }
     }
@@ -80,6 +81,6 @@ public class DateRVAdapter extends RecyclerView.Adapter<DateRVAdapter.ViewHolder
 
     // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
-        void onItemClick(View view, int position);
+        void onItemClick(View view, int position, long date);
     }
 }

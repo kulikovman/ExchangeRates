@@ -1,5 +1,6 @@
 package ru.kulikovman.exchangerates;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -65,9 +66,9 @@ public class DateListActivity extends AppCompatActivity implements DateRVAdapter
     }
 
     @Override
-    public void onItemClick(View view, int position) {
-
+    public void onItemClick(View view, int position, long date) {
+        Intent intent = new Intent(this, ExchangeActivity.class);
+        intent.putExtra("date_in_long", date);
+        startActivity(intent);
     }
-
-
 }
