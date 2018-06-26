@@ -18,7 +18,7 @@ public class DateListActivity extends AppCompatActivity implements DateRecyclerV
 
     private RecyclerView mRecyclerView;
     private DateRecyclerViewAdapter mAdapter;
-    private List<Long> mDateList = new ArrayList<>();
+    //private List<Long> mDateList = new ArrayList<>();
     private Calendar mCalendar;
 
 
@@ -30,7 +30,7 @@ public class DateListActivity extends AppCompatActivity implements DateRecyclerV
 
         // Инициализация
         mCalendar = Calendar.getInstance();
-        Log.d(TAG, "mCalendar: " + mCalendar.getTimeInMillis());
+        //Log.d(TAG, "mCalendar: " + mCalendar.getTimeInMillis());
 
         setupRecyclerView();
     }
@@ -38,21 +38,21 @@ public class DateListActivity extends AppCompatActivity implements DateRecyclerV
     private void setupRecyclerView() {
         mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new DateRecyclerViewAdapter(this, getPackOfDates());
+        mAdapter = new DateRecyclerViewAdapter(this);
+        getPackOfDates();
+
         mAdapter.setClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
+
     }
 
-    public List<Long> getPackOfDates() {
-
+    public void getPackOfDates() {
         int counter = 30;
         for (int i = 0; i < counter; i++) {
-
-            mDateList.add(mCalendar.getTimeInMillis());
+            mAdapter.addDateInList(mCalendar.getTimeInMillis());
+            //mDateList.add(mCalendar.getTimeInMillis());
             mCalendar.add(Calendar.DAY_OF_YEAR, -1);
         }
-
-        return mDateList;
     }
 
     @Override

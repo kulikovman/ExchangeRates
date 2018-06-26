@@ -8,20 +8,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ru.kulikovman.exchangerates.DataHelper;
 import ru.kulikovman.exchangerates.R;
 
 public class DateRecyclerViewAdapter extends RecyclerView.Adapter<DateRecyclerViewAdapter.ViewHolder> {
-    private List<Long> mData;
+    private List<Long> mDateList;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
-    // data is passed into the constructor
-    public DateRecyclerViewAdapter(Context context, List<Long> data) {
+    // dateList is passed into the constructor
+    public DateRecyclerViewAdapter(Context context) {
         this.mInflater = LayoutInflater.from(context);
-        this.mData = data;
+        this.mDateList = new ArrayList<>();
     }
 
     // inflates the row layout from xml when needed
@@ -35,14 +36,14 @@ public class DateRecyclerViewAdapter extends RecyclerView.Adapter<DateRecyclerVi
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String date = DataHelper.convertLongToDateForList(mData.get(position));
+        String date = DataHelper.convertLongToDateForList(mDateList.get(position));
         holder.mDateField.setText(date);
     }
 
     // total number of rows
     @Override
     public int getItemCount() {
-        return mData.size();
+        return mDateList.size();
     }
 
     // stores and recycles views as they are scrolled off screen
@@ -65,7 +66,11 @@ public class DateRecyclerViewAdapter extends RecyclerView.Adapter<DateRecyclerVi
 
     // convenience method for getting data at click position
     public long getItem(int id) {
-        return mData.get(id);
+        return mDateList.get(id);
+    }
+
+    public void addDateInList(long date) {
+        mDateList.add(date);
     }
 
     // allows clicks events to be caught
