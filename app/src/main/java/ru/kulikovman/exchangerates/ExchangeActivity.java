@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 public class ExchangeActivity extends AppCompatActivity {
+    long mDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exchange);
+
+        mDate = (long) getIntent().getSerializableExtra("date_in_long");
+
     }
 
     @Override
