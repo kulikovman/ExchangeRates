@@ -9,6 +9,9 @@
         android:id="@+id/date_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"/>
+        android:layout_margin="15dp"
+        android:fontFamily="sans-serif-light"
+        android:text="20 августа 2016"
+        android:textSize="20sp"/>
 
 </LinearLayout>

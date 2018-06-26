@@ -3,6 +3,7 @@ package ru.kulikovman.exchangerates;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -35,6 +36,7 @@ public class DateListActivity extends AppCompatActivity implements DateRVAdapter
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
         mRecyclerView = findViewById(R.id.recycler_view);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mAdapter = new DateRVAdapter(this);
         mAdapter.setClickListener(this);

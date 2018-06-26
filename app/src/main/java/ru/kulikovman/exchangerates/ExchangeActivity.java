@@ -12,8 +12,14 @@ public class ExchangeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exchange);
 
-        mDate = (long) getIntent().getSerializableExtra("date_in_long");
+        // Инициализация вью элементов
 
+
+        // Получаем дату
+        mDate = (long) getIntent().getSerializableExtra("date_in_long");
+        if (mDate != 0) {
+            loadExchangeRates();
+        }
     }
 
     @Override
@@ -25,5 +31,10 @@ public class ExchangeActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void loadExchangeRates() {
+        // Получаем данные о валютах и выводим на экран
+
     }
 }
