@@ -10,15 +10,16 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import ru.kulikovman.exchangerates.DataHelper;
 import ru.kulikovman.exchangerates.R;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-    private List<Integer> mData;
+public class DateRecyclerViewAdapter extends RecyclerView.Adapter<DateRecyclerViewAdapter.ViewHolder> {
+    private List<Long> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    RecyclerViewAdapter(Context context, List<Integer> data) {
+    public DateRecyclerViewAdapter(Context context, List<Long> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
@@ -34,8 +35,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        int animal = mData.get(position);
-        holder.mDateField.setText(animal);
+        String date = DataHelper.convertLongToDateForList(mData.get(position));
+        holder.mDateField.setText(date);
     }
 
     // total number of rows
@@ -63,12 +64,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     // convenience method for getting data at click position
-    int getItem(int id) {
+    public long getItem(int id) {
         return mData.get(id);
     }
 
     // allows clicks events to be caught
-    void setClickListener(ItemClickListener itemClickListener) {
+    public void setClickListener(ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 
