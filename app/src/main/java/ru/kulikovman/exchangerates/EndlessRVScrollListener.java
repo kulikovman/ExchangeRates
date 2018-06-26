@@ -5,7 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
-public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnScrollListener {
+public abstract class EndlessRVScrollListener extends RecyclerView.OnScrollListener {
     // The minimum amount of items to have below your current scroll position, before mLoading more.
     private int mVisibleThreshold = 10;
     // The current offset index of data you have loaded
@@ -19,16 +19,16 @@ public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnS
 
     private RecyclerView.LayoutManager mLayoutManager;
 
-    public EndlessRecyclerViewScrollListener(LinearLayoutManager layoutManager) {
+    public EndlessRVScrollListener(LinearLayoutManager layoutManager) {
         mLayoutManager = layoutManager;
     }
 
-    public EndlessRecyclerViewScrollListener(GridLayoutManager layoutManager) {
+    public EndlessRVScrollListener(GridLayoutManager layoutManager) {
         mLayoutManager = layoutManager;
         mVisibleThreshold = mVisibleThreshold * layoutManager.getSpanCount();
     }
 
-    public EndlessRecyclerViewScrollListener(StaggeredGridLayoutManager layoutManager) {
+    public EndlessRVScrollListener(StaggeredGridLayoutManager layoutManager) {
         mLayoutManager = layoutManager;
         mVisibleThreshold = mVisibleThreshold * layoutManager.getSpanCount();
     }

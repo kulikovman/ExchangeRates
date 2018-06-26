@@ -14,13 +14,13 @@ import java.util.List;
 import ru.kulikovman.exchangerates.DataHelper;
 import ru.kulikovman.exchangerates.R;
 
-public class DateRecyclerViewAdapter extends RecyclerView.Adapter<DateRecyclerViewAdapter.ViewHolder> {
+public class DateRVAdapter extends RecyclerView.Adapter<DateRVAdapter.ViewHolder> {
     private List<Long> mDateList;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     // dateList is passed into the constructor
-    public DateRecyclerViewAdapter(Context context) {
+    public DateRVAdapter(Context context) {
         this.mInflater = LayoutInflater.from(context);
         this.mDateList = new ArrayList<>();
     }

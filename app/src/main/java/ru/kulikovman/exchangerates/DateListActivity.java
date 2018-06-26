@@ -7,17 +7,15 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
-import ru.kulikovman.exchangerates.adapters.DateRecyclerViewAdapter;
+import ru.kulikovman.exchangerates.adapters.DateRVAdapter;
 
-public class DateListActivity extends AppCompatActivity implements DateRecyclerViewAdapter.ItemClickListener {
+public class DateListActivity extends AppCompatActivity implements DateRVAdapter.ItemClickListener {
     private static final String TAG = "DateListActivity";
 
     private RecyclerView mRecyclerView;
-    private DateRecyclerViewAdapter mAdapter;
+    private DateRVAdapter mAdapter;
     //private List<Long> mDateList = new ArrayList<>();
     private Calendar mCalendar;
 
@@ -38,7 +36,7 @@ public class DateListActivity extends AppCompatActivity implements DateRecyclerV
     private void setupRecyclerView() {
         mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new DateRecyclerViewAdapter(this);
+        mAdapter = new DateRVAdapter(this);
         getPackOfDates();
 
         mAdapter.setClickListener(this);
