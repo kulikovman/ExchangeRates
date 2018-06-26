@@ -16,9 +16,8 @@ public class DateListActivity extends AppCompatActivity implements DateRVAdapter
 
     private RecyclerView mRecyclerView;
     private DateRVAdapter mAdapter;
-    //private List<Long> mDateList = new ArrayList<>();
+    private EndlessRVScrollListener mScrollListener;
     private Calendar mCalendar;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,27 +27,39 @@ public class DateListActivity extends AppCompatActivity implements DateRVAdapter
 
         // Инициализация
         mCalendar = Calendar.getInstance();
-        //Log.d(TAG, "mCalendar: " + mCalendar.getTimeInMillis());
-
         setupRecyclerView();
     }
 
     private void setupRecyclerView() {
-        mRecyclerView = findViewById(R.id.recycler_view);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new DateRVAdapter(this);
-        getPackOfDates();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
+        mRecyclerView = findViewById(R.id.recycler_view);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+        mAdapter = new DateRVAdapter(this);
         mAdapter.setClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
 
+        // Начальный набор дат
+        getPackOfDates();
+
+        // Добавляем даты по мере прокручивания
+        mScrollListener = new EndlessRVScrollListener(linearLayoutManager) {
+
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                Log.d(TAG, "Started onLoadMore in EndlessRVScrollListener");
+                getPackOfDates();
+            }
+        };
+
+        mRecyclerView.addOnScrollListener(mScrollListener);
     }
 
     public void getPackOfDates() {
-        int counter = 30;
-        for (int i = 0; i < counter; i++) {
+        int sizeOfPack = 100;
+        for (int i = 0; i < sizeOfPack; i++) {
             mAdapter.addDateInList(mCalendar.getTimeInMillis());
-            //mDateList.add(mCalendar.getTimeInMillis());
+            mAdapter.notifyItemInserted(mAdapter.getItemCount());
             mCalendar.add(Calendar.DAY_OF_YEAR, -1);
         }
     }
