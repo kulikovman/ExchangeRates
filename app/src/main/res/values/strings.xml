@@ -3,7 +3,7 @@
     <string name="exchange_activity_title">For the selected date</string>
 
     // Коды валют
-    <string name="usd">USD</string>
-    <string name="eur">EUR</string>
+    <string name="usd" translatable="false">USD</string>
+    <string name="eur" translatable="false">EUR</string>
 
 </resources>
