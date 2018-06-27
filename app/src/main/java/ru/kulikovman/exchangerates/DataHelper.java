@@ -14,4 +14,12 @@ public class DataHelper {
 
         return dateFormat.format(calendar.getTime());
     }
+
+    public static String convertLongToDateForApi(long date) {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(date);
+
+        return "XML_daily.asp?date_req=" + dateFormat.format(calendar.getTime());
+    }
 }
