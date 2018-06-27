@@ -20,7 +20,7 @@ import ru.kulikovman.exchangerates.models.Valute;
 public class ExchangeActivity extends AppCompatActivity {
     private static final String TAG = "ExchangeActivity";
 
-    private TextView mRateEuro, mRateDollar;
+    private TextView mEuroRate, mDollarRate, mDateOfRate;
     long mDate;
 
     @Override
@@ -29,8 +29,9 @@ public class ExchangeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_exchange);
 
         // Инициализация вью элементов
-        mRateEuro = findViewById(R.id.euro_rate);
-        mRateDollar = findViewById(R.id.dollar_rate);
+        mEuroRate = findViewById(R.id.euro_rate);
+        mDollarRate = findViewById(R.id.dollar_rate);
+        mDateOfRate = findViewById(R.id.date_of_rate);
 
         // Получаем дату
         mDate = (long) getIntent().getSerializableExtra("date_in_long");
@@ -51,30 +52,28 @@ public class ExchangeActivity extends AppCompatActivity {
     }
 
     public void loadExchangeRates() {
-        // Получаем данные о валютах и выводим на экран
+        // Выводим дату на экран
+        mDateOfRate.setText(DataHelper.convertLongToDateForList(mDate));
+
+        // Создаем строку с датой для запроса
         String targetDate = DataHelper.convertLongToDateForApi(mDate);
         Log.d(TAG, "targetDate = " + targetDate);
 
+        // Получаем данные
         App.getApi().getRateOnDate(targetDate).enqueue(new Callback<ValCurs>() {
             @Override
             public void onResponse(@NonNull Call<ValCurs> call, @NonNull Response<ValCurs> response) {
                 if (response.isSuccessful()) {
-                    List<Valute> valutList = new ArrayList<>();
+                    List<Valute> list = new ArrayList<>();
                     try {
-                        valutList = response.body().getList();
+                        list = response.body().getList();
                     } catch (Exception e) {
                         Log.d(TAG, "Exception:" + e.getMessage());
                     }
 
-                    if (valutList.size() > 0) {
-                        // Доллар
-                        for (Valute valute : valutList) {
-                            if (valute.getName().equals())
-
-                            Log.d(TAG, "Валюта: " + valute.getName());
-                        }
-
-
+                    if (list.size() > 0) {
+                        getCurrencyRate(list, R.string.usd, mDollarRate);
+                        getCurrencyRate(list, R.string.eur, mEuroRate);
                     }
                 } else {
                     Log.d(TAG, "Response is not successful: " + response.code());
@@ -86,6 +85,15 @@ public class ExchangeActivity extends AppCompatActivity {
                 showErrorToast(t);
             }
         });
+    }
+
+    private void getCurrencyRate(List<Valute> list, int usd, TextView valueField) {
+        for (Valute valute : list) {
+            if (valute.getCharCode().equals(getString(usd))) {
+                valueField.setText(valute.getValue());
+                Log.d(TAG, "Currency: " + valute.getCharCode() + " " + valute.getValue());
+            }
+        }
     }
 
     private void showErrorToast(Throwable t) {
