@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Exchange rates</string>
+    <string name="exchange_activity_title">For the selected date</string>
+
+    // Коды валют
     <string name="usd">USD</string>
     <string name="eur">EUR</string>
+
 </resources>

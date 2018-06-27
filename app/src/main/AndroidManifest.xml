@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ExchangeActivity"
+                  android:label="@string/exchange_activity_title"
                   android:parentActivityName=".DateListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
