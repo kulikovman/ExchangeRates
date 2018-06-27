@@ -6,7 +6,7 @@
 * Просмотр курса на выбранную дату в отдельном окне.
 
 ## Использованные библиотеки:
-Retrofit2, HttpOk
+Retrofit2, OkHttp3
 
 ## Скриншоты:
 ![screenshot of sample](http://kulikovman.ru/android/img/ExchangeRates.jpg)
