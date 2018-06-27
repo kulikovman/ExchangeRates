@@ -9,12 +9,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import ru.kulikovman.exchangerates.models.CbrBodyResponse;
+import ru.kulikovman.exchangerates.models.ValCurs;
 import ru.kulikovman.exchangerates.models.Valute;
 
 public class ExchangeActivity extends AppCompatActivity {
@@ -29,8 +29,8 @@ public class ExchangeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_exchange);
 
         // Инициализация вью элементов
-        mRateEuro = findViewById(R.id.rate_euro);
-        mRateDollar = findViewById(R.id.rate_dollar);
+        mRateEuro = findViewById(R.id.euro_rate);
+        mRateDollar = findViewById(R.id.dollar_rate);
 
         // Получаем дату
         mDate = (long) getIntent().getSerializableExtra("date_in_long");
@@ -55,21 +55,26 @@ public class ExchangeActivity extends AppCompatActivity {
         String targetDate = DataHelper.convertLongToDateForApi(mDate);
         Log.d(TAG, "targetDate = " + targetDate);
 
-        App.getApi().getRateOnDate(targetDate).enqueue(new Callback<CbrBodyResponse>() {
+        App.getApi().getRateOnDate(targetDate).enqueue(new Callback<ValCurs>() {
             @Override
-            public void onResponse(@NonNull Call<CbrBodyResponse> call, @NonNull Response<CbrBodyResponse> response) {
+            public void onResponse(@NonNull Call<ValCurs> call, @NonNull Response<ValCurs> response) {
                 if (response.isSuccessful()) {
-                    Log.d(TAG, "Response is successful: " + response.code());
-
-                    ArrayList<Valute> valutList = new ArrayList<>();
+                    List<Valute> valutList = new ArrayList<>();
                     try {
-                        Collections.addAll(valutList, response.body().getValCurs().getValute());
-                    } catch (Exception ignored) {
-                        Log.d(TAG, "Exception:" + ignored.getMessage());
+                        valutList = response.body().getList();
+                    } catch (Exception e) {
+                        Log.d(TAG, "Exception:" + e.getMessage());
                     }
 
                     if (valutList.size() > 0) {
-                        Log.d(TAG, "valutList.size() = " + valutList.size());
+                        // Доллар
+                        for (Valute valute : valutList) {
+                            if (valute.getName().equals())
+
+                            Log.d(TAG, "Валюта: " + valute.getName());
+                        }
+
+
                     }
                 } else {
                     Log.d(TAG, "Response is not successful: " + response.code());
@@ -77,7 +82,7 @@ public class ExchangeActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(@NonNull Call<CbrBodyResponse> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<ValCurs> call, @NonNull Throwable t) {
                 showErrorToast(t);
             }
         });

@@ -1,16 +1,24 @@
 package ru.kulikovman.exchangerates.models;
 
+import org.simpleframework.xml.Attribute;
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
-import org.simpleframework.xml.Text;
 
-@Root(strict = false)
+import java.util.List;
+
+@Root(name = "ValCurs")
 public class ValCurs {
-    @Text(required = false)
+
+    @Attribute(name = "Date")
     private String Date;
-    @Text(required = false)
+
+    @Attribute(name = "name")
     private String name;
 
-    private Valute[] Valute;
+    @ElementList(inline=true)
+    private List<Valute> mList;
+
 
     public String getDate() {
         return Date;
@@ -28,11 +36,11 @@ public class ValCurs {
         this.name = name;
     }
 
-    public Valute[] getValute() {
-        return Valute;
+    public List<Valute> getList() {
+        return mList;
     }
 
-    public void setValute(Valute[] Valute) {
-        this.Valute = Valute;
+    public void setList(List<Valute> list) {
+        mList = list;
     }
 }

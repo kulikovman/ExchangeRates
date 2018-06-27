@@ -29,8 +29,7 @@ public class App extends Application {
         // Инициализируем Retrofit
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://www.cbr.ru/scripts/")
-                .addConverterFactory(SimpleXmlConverterFactory
-                        .createNonStrict(new Persister(new AnnotationStrategy())))
+                .addConverterFactory(SimpleXmlConverterFactory.create(new Persister(new AnnotationStrategy())))
                 .client(client)
                 .build();
 

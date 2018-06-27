@@ -15,19 +15,19 @@
         android:gravity="center_vertical"
         android:layout_marginBottom="5dp">
 
-        <ImageView
+        <TextView
+            android:id="@+id/euro_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_euro_symbol_black_24dp"/>
+            android:textSize="30sp"/>
 
         <TextView
-            android:id="@+id/rate_euro"
+            android:id="@+id/euro_rate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
-            android:text="56.125"
-            android:textSize="20sp"/>
+            android:textSize="30sp"/>
 
     </LinearLayout>
 
@@ -36,19 +36,19 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical">
 
-        <ImageView
+        <TextView
+            android:id="@+id/dollar_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_euro_symbol_black_24dp"/>
+            android:textSize="30sp"/>
 
         <TextView
-            android:id="@+id/rate_dollar"
+            android:id="@+id/dollar_rate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
-            android:text="47.654"
-            android:textSize="20sp"/>
+            android:textSize="30sp"/>
 
     </LinearLayout>
 
