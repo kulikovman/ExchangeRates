@@ -8,62 +8,62 @@ import org.simpleframework.xml.Root;
 public class Valute {
 
     @Element(name = "Name")
-    private String Name;
+    private String mName;
 
     @Element(name = "Value")
-    private String Value;
+    private String mValue;
 
     @Attribute(name = "ID")
-    private String ID;
+    private String mId;
 
     @Element(name = "Nominal")
-    private String Nominal;
+    private String mNominal;
 
     @Element(name = "CharCode")
-    private String CharCode;
+    private String mCharCode;
 
     @Element(name = "NumCode")
     private String NumCode;
 
 
     public String getName() {
-        return Name;
+        return mName;
     }
 
     public void setName(String Name) {
-        this.Name = Name;
+        mName = Name;
     }
 
     public String getValue() {
-        return Value;
+        return mValue;
     }
 
     public void setValue(String Value) {
-        this.Value = Value;
+        mValue = Value;
     }
 
-    public String getID() {
-        return ID;
+    public String getId() {
+        return mId;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setId(String id) {
+        mId = id;
     }
 
     public String getNominal() {
-        return Nominal;
+        return mNominal;
     }
 
     public void setNominal(String Nominal) {
-        this.Nominal = Nominal;
+        mNominal = Nominal;
     }
 
     public String getCharCode() {
-        return CharCode;
+        return mCharCode;
     }
 
     public void setCharCode(String CharCode) {
-        this.CharCode = CharCode;
+        mCharCode = CharCode;
     }
 
     public String getNumCode() {
@@ -71,6 +71,6 @@ public class Valute {
     }
 
     public void setNumCode(String NumCode) {
-        this.NumCode = NumCode;
+        NumCode = NumCode;
     }
 }

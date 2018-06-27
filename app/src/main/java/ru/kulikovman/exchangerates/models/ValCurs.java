@@ -1,7 +1,6 @@
 package ru.kulikovman.exchangerates.models;
 
 import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
@@ -11,29 +10,29 @@ import java.util.List;
 public class ValCurs {
 
     @Attribute(name = "Date")
-    private String Date;
+    private String mDate;
 
     @Attribute(name = "name")
-    private String name;
+    private String mName;
 
     @ElementList(inline=true)
     private List<Valute> mList;
 
 
     public String getDate() {
-        return Date;
+        return mDate;
     }
 
     public void setDate(String Date) {
-        this.Date = Date;
+        mDate = Date;
     }
 
     public String getName() {
-        return name;
+        return mName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        mName = name;
     }
 
     public List<Valute> getList() {
