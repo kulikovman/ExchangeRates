@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#00bcaf</color>
     <color name="colorPrimaryDark">#333333</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#5ebcff</color>
 
     // Базовые цвета
     <color name="transparent">#00ffffff</color>
