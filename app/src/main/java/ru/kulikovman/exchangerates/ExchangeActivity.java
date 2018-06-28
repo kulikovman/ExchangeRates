@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ public class ExchangeActivity extends AppCompatActivity {
     private static final String TAG = "ExchangeActivity";
 
     private TextView mEuroRate, mDollarRate, mDateOfRate;
+    private LinearLayout mDataRateContainer, mLoadingIndicatorContainer;
     long mDate;
 
     @Override
@@ -32,6 +35,8 @@ public class ExchangeActivity extends AppCompatActivity {
         mEuroRate = findViewById(R.id.euro_rate);
         mDollarRate = findViewById(R.id.dollar_rate);
         mDateOfRate = findViewById(R.id.date_of_rate);
+        mDataRateContainer = findViewById(R.id.data_rate_container);
+        mLoadingIndicatorContainer = findViewById(R.id.loading_indicator_container);
 
         // Получаем дату
         mDate = (long) getIntent().getSerializableExtra("date_in_long");
@@ -75,16 +80,29 @@ public class ExchangeActivity extends AppCompatActivity {
                         getCurrencyRate(list, R.string.usd, mDollarRate);
                         getCurrencyRate(list, R.string.eur, mEuroRate);
                     }
+
+                    showDataRate();
                 } else {
                     Log.d(TAG, "Response is not successful: " + response.code());
+                    hideLoadingIndicator();
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ValCurs> call, @NonNull Throwable t) {
+                hideLoadingIndicator();
                 showErrorToast(t);
             }
         });
+    }
+
+    private void hideLoadingIndicator() {
+        mLoadingIndicatorContainer.setVisibility(View.GONE);
+    }
+
+    private void showDataRate() {
+        mLoadingIndicatorContainer.setVisibility(View.GONE);
+        mDataRateContainer.setVisibility(View.VISIBLE);
     }
 
     private void getCurrencyRate(List<Valute> list, int usd, TextView valueField) {
